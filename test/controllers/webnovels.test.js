@@ -19,13 +19,17 @@ describe('webnovels', () => {
 
         // THEN
         console.log(resp);
+        expect(resp.statusCode).toEqual(200);
+        expect(resp.body).not.toBeNull();
+        expect(resp.body).toHaveProperty('success');
+        expect(resp.body).toHaveProperty('data');
         expect(resp.body.success).toBeTruthy();
         expect(resp.body.data).toHaveLength(3);
     });
 
     it('should success when return empty list webnovels', async () => {
         // MOCK
-        webnovelsService.getAllNovels.mockReturnValueOnce([])
+        webnovelsService.getAllNovels.mockReturnValueOnce([]);
 
         // WHEN
         const resp = await request(app).get('/webnovels');
