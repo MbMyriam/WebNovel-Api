@@ -1,13 +1,13 @@
 const app = require('../../app');
 const request = require('supertest');
-const webnovelsService = require('../../services/webnovels');
+const webnovelsService = require('../../services/bd/webnovels');
 
 const mockedWebNovels = [
-    {id: 1, title: "Premier novel", chapiter: [{number: 1, title: "Premier chapitre"}]}, 
-    {id: 2, title: "Second novel", chapiter: [{number: 2, title: "Deuxième chapitre"}]}, 
-    {id: 3, title: "Troisième novel", chapiter: [{number: 3, title: "Troisième chapitre"}]}
+    {id: 1, title: "Premier novel", date: '7/4/1980'}, 
+    {id: 2, title: "Second novel", date: '7/4/2000'}, 
+    {id: 3, title: "Troisième novel", date: '7/4/2023'}
 ];
-jest.mock('../../services/webnovels');
+jest.mock('../../services/bd/webnovels');
 
 describe('webnovels', () => {
     it('should return list of webnovels', async () => {

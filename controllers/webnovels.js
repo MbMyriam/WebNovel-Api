@@ -1,4 +1,4 @@
-const webnovelsService = require('../services/webnovels');
+const webnovelsService = require('../services/bd/webnovels');
 
 
 exports.getAllNovels = (req, res) => {
