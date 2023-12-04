@@ -14,4 +14,5 @@ Api
     - npm install nodemon --save-dev
     - npm install -g nodemon  
     - npm install moment --save
+    - npm install --save sequelize sqlite3
 
