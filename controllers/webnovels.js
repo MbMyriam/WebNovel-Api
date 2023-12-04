@@ -10,8 +10,8 @@ exports.getAllNovels = async (req, res) => {
  exports.addWebnovel = async  (req, res, next) => {
     const webnovelCreated = await  webnovelsService.addWebnovel(req.body.title, req.body.date)
     if (webnovelCreated) {
-       res.status(201).json({success: true, id: webnovelCreated.id})
+       res.status(201).json({success: true, id: webnovelCreated.id});
     } else {
        next(createError(400, "Erreur lorsque vous tentez de créer ce webnovel, vérifier vos arguments"))
     }
- };
+ };;

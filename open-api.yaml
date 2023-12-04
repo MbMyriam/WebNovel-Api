@@ -39,11 +39,10 @@ paths:
                 $ref: "#/components/schemas/WebnovelList"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /webnovels/add:
     post:
       tags:
         - WebNovels
-      security:
-        - bearerAuth: []
       summary: Ajouter un webnovel à l'api
       operationId: addWebnovel
       requestBody:
