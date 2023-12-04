@@ -12,14 +12,7 @@ module.exports = (instance) => {
             type: DataTypes.STRING
         },
         chapiter: {
-            number: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
-                allowNull: false
-            },
-            title: {
-                type: DataTypes.STRING
-            }
+            type: DataTypes.ARRAY(DataTypes.INTEGER, DataTypes.STRING)
         },
         date: {
             type: DataTypes.DATEONLY
