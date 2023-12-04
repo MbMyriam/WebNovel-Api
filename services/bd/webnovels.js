@@ -1,4 +1,4 @@
-const db = require('../../models/webnovels');
+const db = require('../../models');
 
 exports.getAllNovels = async () => {
     return await db.webnovels.findAll();
