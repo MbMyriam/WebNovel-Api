@@ -1,0 +1,42 @@
+openapi: 3.0.1
+info:
+  description: "C'est pour le cours d'Api de Monsieur Quentin"
+  version: "1.0.6"
+  title: "Tp WebNovel-API"
+servers:
+  - url: '{protocol}://{server}'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:
+        default: localhost:3000
+paths:
+  /users:
+    get:
+      tags:
+        - "WebNovels"
+      summary: "Obternir la liste des webnovels"
+      description: "getAllNovels"
+      operationId: "NovelsList"
+      parameters:
+        - name: webnovels[]
+          in: query
+          description: "Une liste de webnovels"
+          required: false
+          schema:
+            type: array
+            items:
+             type: string
+             type: array
+             type: int
+      responses:
+        "200":
+          description: "Obternir la liste des webnovels"
+          content:
+            application/json:
+              schema:
+                type: array
+                 
