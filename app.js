@@ -2,14 +2,14 @@
 const express = require('express');
 const app = express();
 const OpenApiValidator = require('express-openapi-validator');
-const express = require('express');
-const cors = require('cors');
-const OpenApiValidator = require('express-openapi-validator');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
 // Utilisation de middleware globaux
 app.use(express.json()); // Permet de parser automatiquement le json en entrée
+
+// Déclaration du swagger document pour être servi en statique
+const swaggerDocument = YAML.load('./open-api.yaml');
 
 app.use(
     OpenApiValidator.middleware({
@@ -17,15 +17,6 @@ app.use(
       ignoreUndocumented: true
     }),
   );
-
-const spec = path.join(__dirname, './open-api.yaml');
-app.use('/spec', express.static(spec));
-
-app.use((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello world');
-});
 
 // Par défaut quand on appellera "/" on veut servir en statique la doc OpenAPI
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
