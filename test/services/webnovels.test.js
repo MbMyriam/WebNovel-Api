@@ -27,7 +27,7 @@ describe('webnovels', () => {
         expect(resp.body.data).toHaveLength(3);
     });
 
-    it('should throw error when return list of webnovels', async () => {
+    it('should success when return empty list webnovels', async () => {
         // MOCK
         webnovelsService.getAllNovels.mockReturnValueOnce([])
 
