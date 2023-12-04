@@ -15,8 +15,26 @@ describe('webnovels', () => {
 
 
         // THEN
-        console.log(mockedWebNovels);
+        console.log(result);
         expect(result).not.toBeNull();
         expect(result).toHaveLength(3);
+    });
+
+    it('should throw error when return list of webnovels', () => {
+        // GIVEN
+        const result = null;
+
+        // WHEN
+
+
+        // THEN
+        console.log(result);
+        expect(() => {
+            expect(result).not.toBeNull();
+        }).toThrow();
+
+        expect(() => {
+            expect(result).toHaveLength(3);
+        }).toThrow();
     });
 });
