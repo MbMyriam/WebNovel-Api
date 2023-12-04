@@ -11,9 +11,6 @@ module.exports = (instance) => {
         title: {
             type: DataTypes.STRING
         },
-        chapiter: {
-            type: DataTypes.ARRAY(DataTypes.INTEGER, DataTypes.STRING)
-        },
         date: {
             type: DataTypes.DATEONLY
         }
