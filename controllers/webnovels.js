@@ -1,6 +1,8 @@
-const { getAllNovels} = require('../services/webnovels');
+const webnovelsService = require('../services/webnovels');
 
 
-exports.getAllNovels = (req, res) => {
-    res.json(getAllNovels());
-}
+exports.getAllNovels = async (req, res) => {
+    const webnovels = webnovelsService.getAllNovels();
+    res.set('Cache-Control', 'max-age=30');
+    res.json({success: true, data: webnovels});
+ };

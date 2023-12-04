@@ -22,7 +22,7 @@ paths:
       description: "getAllNovels"
       operationId: "NovelsList"
       parameters:
-        - name: webnovels[]
+        - name: webnovels
           in: query
           description: "Une liste de webnovels"
           required: false

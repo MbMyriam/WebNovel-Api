@@ -4,6 +4,6 @@ let webnovels = [
     {id: 3, title: "Troisième novel", chapiter: [{number: 3, title: "Troisième chapitre"}]}
 ];
 
-exports.getAllNovels = () => {
+exports.getAllNovels = async () => {
     return webnovels;
-}
+};
