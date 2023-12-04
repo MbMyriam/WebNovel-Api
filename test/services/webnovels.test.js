@@ -8,11 +8,11 @@ const mockedWebNovels = [
     {id: 3, title: "Troisième novel", chapiter: [{number: 3, title: "Troisième chapitre"}]}
 ];
 jest.mock('../../services/webnovels');
-webnovelsService.getAllNovels.mockReturnValueOnce(mockedWebNovels);
 
 describe('webnovels', () => {
     it('should return list of webnovels', async () => {
-        // GIVEN
+        // MOCK
+        webnovelsService.getAllNovels.mockReturnValueOnce(mockedWebNovels);
 
         // WHEN
         const resp = await request(app).get('/webnovels');
@@ -27,21 +27,15 @@ describe('webnovels', () => {
         expect(resp.body.data).toHaveLength(3);
     });
 
-    it('should throw error when return list of webnovels', () => {
-        // GIVEN
-        const result = null;
+    it('should throw error when return list of webnovels', async () => {
+        // MOCK
+        webnovelsService.getAllNovels.mockReturnValueOnce([])
 
         // WHEN
-
+        const resp = await request(app).get('/webnovels');
 
         // THEN
-        console.log(result);
-        expect(() => {
-            expect(result).not.toBeNull();
-        }).toThrow();
-
-        expect(() => {
-            expect(result).toHaveLength(3);
-        }).toThrow();
+        expect(resp.statusCode).toEqual(200);
+        expect(resp.body.data).toHaveLength(0);
     });
 });
