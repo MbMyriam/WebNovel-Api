@@ -9,9 +9,9 @@ const mockedWebNovels = [
 ];
 jest.mock('../../services/bd/webnovels');
 
-describe('webnovels', () => {
+describe('get webnovels', () => {
     it('should return list of webnovels', async () => {
-        // MOCK
+        // GIVEN
         webnovelsService.getAllNovels.mockReturnValueOnce(mockedWebNovels);
 
         // WHEN
@@ -28,7 +28,7 @@ describe('webnovels', () => {
     });
 
     it('should success when return empty list webnovels', async () => {
-        // MOCK
+        // GIVEN
         webnovelsService.getAllNovels.mockReturnValueOnce([]);
 
         // WHEN
@@ -37,5 +37,24 @@ describe('webnovels', () => {
         // THEN
         expect(resp.statusCode).toEqual(200);
         expect(resp.body.data).toHaveLength(0);
+    });
+});
+
+describe('post webnovels', () => {
+    it('should add webnovel successfully', async () => {
+
+        webnovelsService.addWebnovel.mockReturnValueOnce([]);
+
+        // When
+        const resp = await request(app).post('/webnovels/add').send({
+            title: 'Histoire',
+            date: '2023-04-12'
+        });
+
+        // Then
+        expect(resp.statusCode).toEqual(201);
+        expect(resp.body).not.toBeNull();
+        expect(resp.body).toHaveProperty('success');
+        expect(resp.body.success).toBeTruthy();
     });
 });

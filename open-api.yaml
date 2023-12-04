@@ -163,10 +163,4 @@ components:
                 type: string
                 default: "Serveur inconnu"
                 example: "Serveur inconnu"
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: Set your JWT token
       
