@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const webnovelsController = require('../controllers/webnovels');
 
-router.get('/webnovels', webnovelsController.getAllNovels);
+router.get('/', webnovelsController.getAllNovels);
 
 module.exports = router;

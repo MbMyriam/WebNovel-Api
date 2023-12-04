@@ -18,6 +18,10 @@ app.use(
     }),
   );
 
+// Déclaration des routers principaux qui utilisent les sous-routers
+const webnovelsRouter = require('./routers/webnovels');
+app.use('/webnovels', webnovelsRouter);
+
 // Par défaut quand on appellera "/" on veut servir en statique la doc OpenAPI
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
