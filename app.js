@@ -2,6 +2,11 @@
 const express = require('express');
 const app = express();
 const OpenApiValidator = require('express-openapi-validator');
+const express = require('express');
+const cors = require('cors');
+const OpenApiValidator = require('express-openapi-validator');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
 
 // Utilisation de middleware globaux
 app.use(express.json()); // Permet de parser automatiquement le json en entrée
@@ -22,6 +27,9 @@ app.use((req, res) => {
     res.end('Hello world');
 });
 
+// Par défaut quand on appellera "/" on veut servir en statique la doc OpenAPI
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Déclaration globale du middleware d'erreur, on assume que le paramètre error, possède certains attributs
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
@@ -30,4 +38,4 @@ app.use((error, req, res, next) => {
 
 
 // On oublie pas d'exporter pour tester
-module.exports = app
+module.exports = app;
