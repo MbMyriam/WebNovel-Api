@@ -54,6 +54,217 @@ paths:
           $ref: "#/components/responses/InvalidBody"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /webnovels/{id}:
+    get:
+      tags:
+        - WebNovels
+      summary: Obtenir un webnovel par son id
+      operationId: getWebnovelById
+      parameters:
+        - name: id
+          in: query
+          description: "Un webnovel"
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Obternir un webnovel"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Webnovel"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /webnovels/delete/{id}:
+    delete:
+      tags:
+        - WebNovels
+      summary: Supprimer un webnovel par son id
+      operationId: deleteWebnovelById
+      parameters:
+        - $ref : '#/components/parameters/idInPath'
+      responses:
+        "200":
+          description: Webnovel supprimé
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /users:
+    get:
+      tags:
+        - "Users"
+      summary: "Obternir la liste des utilisateurs"
+      description: "getAllUsers"
+      operationId: "UsersList"
+      parameters:
+        - name: users[]
+          in: query
+          description: "list users"
+          required: false
+          schema:
+            type: "array"
+            items:
+             type: string
+      responses:
+        "200":
+          description: "Obternir la liste des utilisateurs"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserList'
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users/{id}:
+    get:
+      tags:
+          - "Users"
+      summary: "Récupérer un utilisateur par son id"
+      description: "getUserById"
+      operationId: "User by Id"
+      parameters:
+        - name: id
+          in: path
+          description: "Un user"
+          required: true
+          schema:
+            type: "integer"
+            items:
+             type: integer
+      responses:
+        "200":
+          description: "Obternir un user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResult"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users/{firstName}:
+    get:
+      tags:
+          - "Users"
+      summary: "Récupérer un utilisateur par son prénom"
+      description: "Récup user by name"
+      operationId: "findByName"
+      parameters:
+        - name: firstName
+          in: path
+          description: "Un user"
+          required: true
+          schema:
+            type: "string"
+            items:
+             type: string
+      responses:
+        "200":
+          description: "Obternir un user par non prénom"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResult"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+          
+  /users/add:
+    post:
+      tags:
+          - "Users"
+      summary: "Créer un utilisateur"
+      description: "addUser"
+      operationId: "AddUser"
+      requestBody:
+        $ref: "#/components/requestBodies/UserCreation"
+      responses:
+        "201":
+          $ref: "#/components/responses/ResourceCreated"
+        "400":
+          $ref: "#/components/responses/InvalidBody"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users/update/{id}:
+    put:
+      tags:
+          - "Users"
+      summary: "Modifier un utilisateur"
+      description: "updateUser"
+      operationId: "UpdateUser"
+      parameters:
+        - name: update
+          in: query
+          description: "Modifier un utilisateur"
+          required: false
+          schema:
+            type: "array"
+            items:
+             type: string
+        - name: id
+          in: path
+          description: "Modifier un utilisateur"
+          required: true
+          schema:
+            type: "integer"
+            items:
+             type: integer
+      responses:
+        "200":
+          description: "Modifier un utilisateur"
+  /users/delete/{id}:
+    delete:
+      tags:
+          - "Users"
+      summary: "Supprimer un utilisateur par son id"
+      description: "Supprimer user"
+      operationId: "deleteUserById"
+      parameters:
+        - name: delete
+          in: query
+          description: "Supprimer un user"
+          required: false
+          schema:
+            type: "array"
+            items:
+             type: string
+        - name: id
+          in: path
+          description: "Supprimer un user avec id"
+          required: true
+          schema:
+            type: "integer"
+            items:
+             type: integer
+      responses:
+        "200":
+          description: User supprimé
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
 components:
   parameters:
     idInPath:
@@ -83,10 +294,42 @@ components:
         title:
           type: string
           example: "Webnovel"
+        auteur:
+          type: string
+          example: "Holmes"
         date:
           type: string
           format: date
           example: "2022-10-25"
+    UserList:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: true
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResult'
+    UserResult:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: Tomi31
+        password:
+          type: string
+          example: xxxxx32
+        firstname:
+          type: string
+          example: Tom
+        lastname:
+          type: string
+          example: Hank
   requestBodies:
     WebnovelCreation:
       required: true
@@ -97,6 +340,15 @@ components:
             required: [title, date]
             allOf:
               - $ref: '#/components/schemas/Webnovel'
+    UserCreation:
+      required: true
+      description: User a creer
+      content:
+        application/json:
+          schema:
+            required: [username, password, firstname, lastname]
+            allOf:
+              - $ref: '#/components/schemas/UserResult'
   responses:
     ResourceCreated:
       description: "Le webnovel a été créé"

@@ -14,4 +14,22 @@ exports.getAllNovels = async (req, res) => {
     } else {
        next(createError(400, "Erreur lorsque vous tentez de créer ce webnovel, vérifier vos arguments"))
     }
- };;
+ };
+
+ exports.getWebnovelById = async (req, res, next) => {
+   const webnovel = await webnovelsService.getWebnovelById(req.params.id)
+   if (webnovel) {
+      res.json({success: true, data: webnovel})
+   } else {
+      next(createError(404, "Non trouvé"))
+   }
+};
+
+exports.deleteWebnovelById = (req, res, next) => {
+   try {
+      webnovelsService.deleteWebnovelById(req.params.id)
+      res.status(204).send()
+   } catch(e) {
+      next(createError(404, `Ce webnovel n'existe pas`))
+   }
+};

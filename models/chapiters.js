@@ -1,17 +1,18 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (instance) => {
-    return instance.define('webnovel', {
-        id: {
+    return instance.define('chapiter', {
+        idWebnovel: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        title: {
-            type: DataTypes.STRING
+        number: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false
         },
-        auteur: {
+        title: {
             type: DataTypes.STRING
         },
         date: {
